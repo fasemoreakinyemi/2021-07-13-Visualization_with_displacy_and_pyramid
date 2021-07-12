@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{request.locale_name}}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pyramid web application">
+    <meta name="author" content="Pylons Project">
+    <!-- <link rel="shortcut icon" href="{{request.static_url('livivo_sru:static/pyramid-16x16.png')}}">-->
+
+    <title>Retrieve entities</title>
+
+    <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this scaffold -->
+    <!--<link href="{{request.static_url('livivo_sru:static/theme.css')}}" rel="stylesheet">-->
+
+    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY" crossorigin="anonymous"></script>
+      <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+</nav>
+<div class="container mt-4">
+	<form id="retrieve_entities">
+		<div class="mb-3">
+  			<label for="title" class="form-label">Title</label>
+  			<input type="text" class="form-control" id="title" placeholder="">
+		</div>
+		<div class="mb-3">
+  			<label for="abstract" class="form-label">Abstract</label>
+  			<textarea class="form-control" id="abstract" rows="8"></textarea>
+		</div>
+		<div class="mb-3">
+  			<label for="exampleFormControlTextarea1" class="form-label">Select model</label>
+			<select class="form-select" aria-label="Default select example" id="model">
+  				<option value="1">en_core_web_sm</option>
+  				<option value="2">coxiella_mst_entities</option>
+  				<option value="3">arindam_entities</option>
+			</select>
+		</div>
+  		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<div class="container mt-4">
+    <div id="result"></div>
+</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{request.static_url('livivo_sru:static/js/retrieve.js')}}"></script>
+
+  </body>
+</html>

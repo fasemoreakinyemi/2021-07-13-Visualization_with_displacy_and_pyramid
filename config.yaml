@@ -1,0 +1,6 @@
+default_context:
+        project_name: "livivo_sru"
+        repo_name: "livivo_sru"
+        template_language: "jinja2"
+        backend: "sqlalchemy"
+        _copy_without_render": "static/*"
