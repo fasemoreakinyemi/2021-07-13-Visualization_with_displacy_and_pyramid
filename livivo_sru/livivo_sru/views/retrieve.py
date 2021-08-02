@@ -68,6 +68,10 @@ def get_options(ent_type):
 def retrieve(request):
     return {}
 
+@view_config(route_name='retrieve_article', renderer='livivo_sru:templates/retrieve.jinja2')
+def retrieve_article(request):
+    return {}
+
 
 @view_config(route_name='retrieve_api', renderer='json')
 def retrieve_api(request):
