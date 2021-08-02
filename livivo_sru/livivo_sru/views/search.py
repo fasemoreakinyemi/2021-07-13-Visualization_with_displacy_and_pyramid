@@ -17,10 +17,13 @@ def search_api(request):
     
     if "search" in request.params:
         search = request.params['search']
+        phrase = '\"{}\"'.format(search)
     #query = collection.find().limit(10)
         query = collection.find(
             { "$text": {
-                "$search": search }
+                "$search": phrase }},
+            {'score': {
+                '$meta': 'textScore'}
             }).limit(10)
 
     if "articleId" in request.params:

@@ -14,17 +14,13 @@ client = MongoClient('localhost', 27017)
 db = client['coxiella_articles']
 collection = db['articles_collection']
 #collection.insert_many(articles)
-#collection.drop_indexes()
-#collection.create_index([
-#    ('liv.orig_data.ABSTRACT', pymongo.TEXT),
-#    ('liv.orig_data.TITEL', pymongo.TEXT)
-#], name="titel_and_abstract_index")
+collection.drop_indexes()
+collection.create_index([
+    ('liv.orig_data.ABSTRACT', pymongo.TEXT),
+    ('liv.orig_data.TITLE', pymongo.TEXT)
+], name="titel_and_abstract_index")
 
 print(collection.index_information())
-#collection.create_index([
-#    ('liv["orig_data"]["ABSTRACT"]', pymongo.TEXT),
-#    ('liv["orig_data"]["TITLE"]', pymongo.TEXT),
-#    ('liv["origdata"]["TITLE"]', pymongo.TEXT)])
 
 
 
