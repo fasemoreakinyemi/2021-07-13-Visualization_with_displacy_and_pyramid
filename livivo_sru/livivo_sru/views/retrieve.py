@@ -5,7 +5,9 @@ import spacy
 from spacy import displacy
 from spacy.matcher import PhraseMatcher, Matcher
 from spacy.tokens import Span
+from pymongo import MongoClient
 import json
+from bson.json_util import dumps
     
 nlp = spacy.load("en_core_web_sm")
 
@@ -85,8 +87,14 @@ def retrieve_api(request):
         opt = get_options("mst")
         doc = find_mst_genotype(abstract, nlp)
         markup = displacy.render(doc, style="ent", options=opt, page=False)
+    
+    client = MongoClient('localhost', 27017)
+    db = client['articles_collection']
+    collection = db['collection_names']
+    query = collection.find()
 
-    return {"title": markup}
+    return {"title": markup,
+            "collection": dumps(query)}
 
 
 #    mst_pattern1 = [{"LOWER": "mst"}, {"IS_DIGIT": True}]

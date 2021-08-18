@@ -6,3 +6,8 @@ def includeme(config):
     config.add_route('retrieve_api', '/retrieve_api')
     config.add_route('search', '/search')
     config.add_route('search_api', '/search_api')
+    config.add_route('collections', '/collections')
+    config.add_route('collections_post_api', '/collections_post_api')
+    config.add_route('collections_get_api', '/collections_get_api')
+    config.add_route('insert_collection_api', '/insert_collection_api')
+    config.add_route('collection_view', '/collections/view/{collection}')

@@ -55,7 +55,41 @@ jQuery.ajax({
 		"model": model
 	},
         success : function(data){
-             $("#result").html(data.title)
+		body = "<div class='dropdown my-2'><button class='btn btn-primary dropdown-toggle' type='button' id='addtoCollect' data-bs-toggle='dropdown' aria-expanded='false'>Add to existing collection</button><ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>"
+			body+= "<li><a href='/collections' class='btn btn-primary'> New collection</a></li>"
+		collection = JSON.parse(data.collection)
+	        collection.map(function(rows){
+
+			body += "<li class='addtoC'><a class='dropdown-item'>" + rows["name"] + "</a></li>" 
+		});
+		body += "</ul></div></div>"
+	     container = "<div class='pre'>" + data.title + body 
+             $("#result").html(container)
+        }
+    });
+
+
+});
+
+
+$('body').on('click', 'li.addtoC', function() {
+    var name = $(this).text()
+    var id = location.href.split("/")[location.href.split("/").length - 1];
+    event.preventDefault();
+
+    jQuery.ajax({
+        url: '/insert_collection_api',
+        type: 'GET',
+        dataType: 'json',
+	data: {
+		"name": name,
+		"id": id
+	},
+        success : function(data){
+	     if (data.results === "exists"){
+	     alert("Article already exists in collection")}
+	     else{
+	     alert("Successfully added to collection")}
         }
     });
 
@@ -86,7 +120,6 @@ jQuery.ajax({
 });
 
 function display_results(data){
-	     console.log( Object.keys( JSON.parse(data.results)).length )
              articles = JSON.parse(data.results)
 	     var container = document.createElement("div")
 	     container.className = "container"
