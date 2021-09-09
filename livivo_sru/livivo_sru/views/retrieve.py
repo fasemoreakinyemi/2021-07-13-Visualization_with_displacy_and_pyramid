@@ -7,14 +7,15 @@ from spacy.matcher import PhraseMatcher, Matcher
 from spacy.tokens import Span
 from pymongo import MongoClient
 import json
+import os
 from bson.json_util import dumps
     
 nlp = spacy.load("en_core_web_sm")
 
-with open("/home/mandela/Doctoral/2021-07-08_document_visualization_with_spacy/livivo_sru/livivo_sru/data/countries.json", encoding="utf8") as f:
-    countries = json.loads(f.read())
+with open("{}/livivo_sru/data/countries.json".format(os.getcwd()), encoding="utf8") as f:
+     countries = json.loads(f.read())
 
-with open("/home/mandela/Doctoral/2021-07-08_document_visualization_with_spacy/livivo_sru/livivo_sru/data/hosts/animals.txt") as anf:
+with open("{}/livivo_sru/data/hosts/animals.txt".format(os.getcwd())) as anf:
     animals = list(nlp.pipe(anf.read().splitlines()))
 
 countries_list = list(nlp.pipe(countries))
@@ -88,7 +89,8 @@ def retrieve_api(request):
         doc = find_mst_genotype(abstract, nlp)
         markup = displacy.render(doc, style="ent", options=opt, page=False)
     
-    client = MongoClient('localhost', 27017)
+    url = os.environ['ME_CONFIG_MONGODB_URL']
+    client = MongoClient(url)
     db = client['articles_collection']
     collection = db['collection_names']
     query = collection.find()

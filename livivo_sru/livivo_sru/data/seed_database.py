@@ -4,17 +4,18 @@ from pymongo import MongoClient
 import json
 from bson.json_util import loads
 import pymongo
+import os
 
-#articles = []
-#for line in open("/home/mandela/Doctoral/2021-07-08_document_visualization_with_spacy/livivo_sru/livivo_sru/data/json/coxiella_burnetii.json",
-#                 "r",
-#                 encoding="utf8"):
-#    articles.append(loads(line.strip()))
-client = MongoClient('localhost', 27017)
+articles = []
+for line in open("{}/livivo_sru/data/json/coxiella_burnetii.json".format(os.getcwd()),
+                 "r", encoding="utf8"):
+    articles.append(loads(line.strip()))
+url = os.environ['ME_CONFIG_MONGODB_URL']
+print(url)
+client = MongoClient("mongodb://root:example@mongodb:27017")
 db = client['coxiella_articles']
 collection = db['articles_collection']
-#collection.insert_many(articles)
-collection.drop_indexes()
+collection.insert_many(articles)
 collection.create_index([
     ('liv.orig_data.ABSTRACT', pymongo.TEXT),
     ('liv.orig_data.TITLE', pymongo.TEXT)

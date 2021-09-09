@@ -4,6 +4,7 @@ import json
 from pymongo import MongoClient
 from bson.json_util import dumps
 from bson.objectid import ObjectId    
+import os
 
 @view_config(route_name='search', renderer='livivo_sru:templates/search.jinja2')
 def search(request):
@@ -11,7 +12,8 @@ def search(request):
 
 @view_config(route_name='search_api', renderer='json')
 def search_api(request):
-    client = MongoClient('localhost', 27017)
+    url = os.environ['ME_CONFIG_MONGODB_URL']
+    client = MongoClient(url)
     db = client['coxiella_articles']
     collection = db['articles_collection']
     
@@ -34,23 +36,3 @@ def search_api(request):
     results = dumps(query)
 
     return {"results": results}
-#    query = collection.find({"$or": [
-#        { "$text": {
-#            "$search": search }
-#        },
-#        {
-#            'liv["orig_data"]["ABSTRACT"]': {
-#                "$regex": search,
-#                "$options": 'i'
-#            }
-#        }
-#                                    ]
-#                                }
-#                            ).limit(10)
-#
-#        {
-#            'liv["orig_data"]["TITLE"]': {
-#                "$regex": search,
-#                "$options": 'i'
-#            }
-#        }

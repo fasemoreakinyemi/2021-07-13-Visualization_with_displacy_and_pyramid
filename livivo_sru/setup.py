@@ -20,6 +20,9 @@ requires = [
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
+    'pymongo==3.10.1',
+    'spacy',
+    'pyramid'
 ]
 
 tests_require = [

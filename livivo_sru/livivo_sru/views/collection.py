@@ -5,11 +5,13 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 from bson.objectid import ObjectId    
 import json
-    
+import os
+
+url = os.environ['ME_CONFIG_MONGODB_URL']
 @view_config(route_name='collections',
              renderer='livivo_sru:templates/collections.jinja2')
 def collections(request):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient(url)
     db = client['articles_collection']
     collection = db['collection_names']
     query = collection.find()
@@ -17,7 +19,7 @@ def collections(request):
 
 @view_config(route_name='collections_post_api', renderer='json')
 def collection_post_api(request):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient(url)
     db = client['articles_collection']
     collection = db['collection_names']
     input_dict = {"name": request.params['name'],
@@ -31,7 +33,7 @@ def collection_post_api(request):
 
 @view_config(route_name='insert_collection_api', renderer='json')
 def insert_collection_api(request):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient(url)
     db = client['articles_collection']
     collection = db['collection_table']
     input_dict = {"collection_name": request.params['name'],
@@ -46,7 +48,7 @@ def insert_collection_api(request):
 @view_config(route_name='collection_view',
              renderer='livivo_sru:templates/collection_view.jinja2')
 def collection_view(request):
-    client = MongoClient('localhost', 27017)
+    client = MongoClient(url)
     db = client['articles_collection']
     collection = db['collection_table']
     collection_name = request.matchdict["collection"]
