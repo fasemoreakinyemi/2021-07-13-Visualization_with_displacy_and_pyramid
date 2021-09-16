@@ -3,7 +3,8 @@ main(){
 	DIR="${PWD}"
 #	conda_create_env
 #	conda_start_env
-	install_dep
+#	install_dep
+	docker_build
 }
 
 conda_create_env(){
@@ -20,5 +21,10 @@ install_dep(){
 	python -m spacy download en_core_web_sm
 #	conda install cookiecutter
 #	cookiecutter --no-input --config-file ./config.yaml gh:Pylons/pyramid-cookiecutter-starter
+}
+
+docker_build(){
+	sudo docker build -t akfasemore/livivo_sru_pyramid .
+	sudo docker push akfasemore/livivo_sru_pyramid
 }
 main

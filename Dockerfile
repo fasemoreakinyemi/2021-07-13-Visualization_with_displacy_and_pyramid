@@ -13,5 +13,5 @@ RUN pip3 install --upgrade pip && \
 
 EXPOSE 6543
 
-CMD ["pserve","development.ini"]
+CMD ["/bin/sh", "-c", "start.sh"]
 

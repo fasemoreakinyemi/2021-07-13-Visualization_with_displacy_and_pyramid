@@ -11,9 +11,7 @@ services:
     volumes:
       - mongodbdata:/data/db
   pyramid:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: 'akfasemore/livivo_sru_pyramid'
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=root
       - ME_CONFIG_MONGODB_ADMINPASSWORD=example
